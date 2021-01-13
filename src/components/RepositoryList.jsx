@@ -6,6 +6,15 @@ const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
+  flexContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: '#e1e4e8',
+  },
+  flexItemA: {
+    flexGrow: 0,
+    backgroundColor: 'white',
+  },
 });
 
 const repositories = [
@@ -59,17 +68,24 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
   const renderItem = ({ item }) => (
-    
-    <RepositoryItem itemData={item} />
+    <View style={styles.flexItemA}>
+      <RepositoryItem itemData={item} />
+    </View>
+
   );
   return (
-    <FlatList
-      data={repositories}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={renderItem}
-      
-     
-    />
+
+    <View style={styles.flexContainer}>
+
+
+      <FlatList
+        data={repositories}
+        ItemSeparatorComponent={ItemSeparator}
+        renderItem={renderItem}
+      />
+
+
+    </View>
   );
 };
 
