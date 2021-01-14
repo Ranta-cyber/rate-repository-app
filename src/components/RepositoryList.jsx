@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
-  flexContainer: {
+  /* flexContainer: {
     display: 'flex',
     flexDirection: 'row',
     backgroundColor: '#e1e4e8',
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   flexItemA: {
     flexGrow: 0,
     backgroundColor: 'white',
-  },
+  }, */
 });
 
 const repositories = [
@@ -75,7 +75,7 @@ const RepositoryList = () => {
   );
   return (
 
-    <View style={styles.flexContainer}>
+    //<View style={styles.flexContainer}>
 
 
       <FlatList
@@ -85,7 +85,7 @@ const RepositoryList = () => {
       />
 
 
-    </View>
+    //</View>
   );
 };
 
