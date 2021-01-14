@@ -4,39 +4,33 @@ import { View, StyleSheet, Image } from 'react-native';
 import Text from './text';
 
 const styles = StyleSheet.create({
-
-  /* container: {
-    textAlign: 'left',
-    backgroundcolor: 'white'
-  },*/
   flexContainer: {
     display: 'flex',
     flexDirection: 'row',
     backgroundColor: 'white',
-    //flexFlow: 'row wrap',
     flexWrap: 'wrap',
-    //flex: 200,
-    alignItems: 'flex-w',
-    justifyContent: 'space-around',    
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    width: 300,
+    height: 250
   },
   avatar: {
-    width: 50,
-    height: 58,
+    width: 40,
+    height: 48,
     padding: 20,
     borderRadius: 10,
-    top: 20
-    
+    top: 2,
+    justifyContent: 'space-around',
   },
   flexItem1: {
     flexGrow: 0,
     backgroundColor: 'white',
     fontWeight: 'bold',
-    width: 500,
-    height: 95,
+    width: 300,
+    height: 150,
     top: 10,
-    lineHeight: 6
-    
-    
+    lineHeight: 6,
+    flexDirection: 'column',
   },
   flexItem2: {
     flexGrow: 0,
@@ -50,59 +44,72 @@ const styles = StyleSheet.create({
     flexGrow: 0,
     backgroundColor: 'white',
     flexDirection: 'column',
-    width: 50,
-    height: 80,
+    width: 40,
+    height: 60,
     alignItems: 'center',
     justifyContent: 'space-around',
-
   },
+  flexItem5: {
+    flexGrow: 0,
+    backgroundColor: 'white',
+    flexDirection: 'column',
+    width: 200,
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap'
+  },
+  flexItem6: {
+    flexGrow: 0,
+    backgroundColor: 'white',
+    fontWeight: 'bold',
+    width: 250,
+    height: 100,
+    top: 20,
+    lineHeight: 6,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+  },
+ 
   languageTag: {
     backgroundColor: '#0366d6',
     color: 'white',
     width: 115,
     height: 40,
     padding: 8,
-    
     borderRadius: 10,
-    
-  }, 
-
+  },
 });
 
 const RepositoryItem = ({ itemData }) => (
-
   <View style={styles.flexContainer}>
-    
-    <Image
-        style={styles.avatar}
-        source={{
-          uri: itemData.ownerAvatarUrl,
-        }}
-      />
-      
     <View style={styles.flexItem1}>
-      <Text> <b>{itemData.fullName}</b></Text>
-      <br></br>
-   {/*  </View>
-    <View style={styles.flexItem1}> */}
-      <Text>description: {itemData.description}</Text>
-      <br></br>
-    {/* </View>
-    </View>
-    <View style={styles.flexItem1}> */}
-      <Text style={styles.languageTag}> {itemData.language}</Text>
-    </View>
-    <View style={styles.flexItem4}>
-      <Text><b>{(itemData.forksCount/1000).toFixed(1)}k</b> Forks</Text>
-    </View>
-    <View style={styles.flexItem4}>
-      <Text><b>{(itemData.stargazersCount/1000).toFixed(1)}k</b> Stars</Text>
-    </View>
-    <View style={styles.flexItem4} >
-      <Text color="textSecondary"><b>{itemData.ratingAverage}</b> Rating</Text>
+      <View style={styles.flexItem5}>
+        <Image
+          style={styles.avatar}
+          source={{
+            uri: itemData.ownerAvatarUrl,
+          }}
+        />
+        <View style={styles.flexItem6}>
+          <Text> {itemData.fullName}</Text>
+          <Text> {itemData.description}</Text>
+          <Text style={styles.languageTag}> {itemData.language}</Text>
+        </View>
+      </View>
+
     </View>
     <View style={styles.flexItem4}>
-      <Text ><b>{itemData.reviewCount}</b> Reviews</Text>
+      <Text>{(itemData.forksCount / 1000).toFixed(1)}k Forks</Text>
+    </View>
+    <View style={styles.flexItem4}>
+      <Text>{(itemData.stargazersCount / 1000).toFixed(1)}k Stars</Text>
+    </View>
+    <View style={styles.flexItem4}>
+      <Text color="textSecondary">{itemData.ratingAverage} Rating</Text>
+    </View>
+    <View style={styles.flexItem4}>
+      <Text>{itemData.reviewCount} Reviews</Text>
     </View>
   </View>
 );
