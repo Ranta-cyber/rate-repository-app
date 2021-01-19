@@ -5,6 +5,7 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import { Link } from 'react-router-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
     color: 'white',
     width: 100,
     height: 50,
-    fontWeight: 'bold'
+   // fontWeight: 700
   }
 });
 
@@ -27,7 +28,8 @@ const RepoTab = () => {
     <View>
       <TouchableWithoutFeedback onPress={pressRepo()}>
         <View >
-          <Text style={styles.textStyle}>Repositories</Text>
+          {/* <Text style={styles.textStyle}>Repositories</Text> */}
+          <Link to="/">Repositories</Link>
         </View>
       </TouchableWithoutFeedback >
     </View>

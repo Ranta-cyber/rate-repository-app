@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   flexItem1: {
     flexGrow: 0,
     backgroundColor: 'white',
-    fontWeight: 'bold',
+    fontWeight: 700,
     width: 300,
     height: 150,
     top: 10,
@@ -62,10 +62,10 @@ const styles = StyleSheet.create({
   flexItem6: {
     flexGrow: 0,
     backgroundColor: 'white',
-    fontWeight: 'bold',
     width: 250,
     height: 100,
     top: 20,
+    //fontWeight: 700,
     lineHeight: 6,
     flexDirection: 'column',
     justifyContent: 'space-around',
@@ -91,9 +91,9 @@ const RepositoryItem = ({ itemData }) => (
             uri: itemData.ownerAvatarUrl,
           }}
         />
-        <View style={styles.flexItem6}>
-          <Text> {itemData.fullName}</Text>
-          <Text> {itemData.description}</Text>
+        <View  style={styles.flexItem6}>
+          <Text > {itemData.fullName}</Text>
+          <Text>  {itemData.description}</Text>
           <Text style={styles.languageTag}> {itemData.language}</Text>
         </View>
       </View>

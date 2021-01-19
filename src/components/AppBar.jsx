@@ -1,14 +1,18 @@
 import React from 'react';
 import {
   View,
+  Text,
   StyleSheet,
-  StatusBar,
   ScrollView,
+  TouchableWithoutFeedback,
 } from 'react-native';
-import { Link } from 'react-router-native';
-import Constants from 'expo-constants';
+import { Link } from 'react-router-native'
 import RepoTab from './AppBarTab';
 import SignInTab from './AppBarTabSignIn';
+
+import Constants from 'expo-constants';
+import SignIn from './SignIn';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,7 +33,7 @@ const styles = StyleSheet.create({
     color: 'white',
     width: 100,
     height: 50,
-    fontWeight: 'bold',
+    //fontWeight: theme.fontWeights.bold,
   },
   item: {
     flexGrow: 0,
@@ -37,28 +41,41 @@ const styles = StyleSheet.create({
     height: 100,
     top: 10
   },
-  scrollView: {
-    scrollView: {
-      backgroundColor: 'pink',
-      marginHorizontal: 20,
-
-    },
-  }
+  /*   scrollView: {
+      scrollView: {
+        backgroundColor: 'pink',
+        marginHorizontal: 20,
+  
+      },
+    } */
 });
+
+ const PressRepo = () => {
+  return (
+    <Link to="/signin" component={TouchableWithoutFeedback}>
+          <Text style={styles.textStyle}>Sign In</Text>
+          </Link>
+  );
+};
+
+
+const PressSign = () => {
+  return(
+        <Link to="/" component={TouchableWithoutFeedback}>
+          <Text style={styles.textStyle}>Repositories</Text>
+        </Link>
+  );}; 
+
 
 const AppBar = () => {
   return (
 
     <View style={styles.container} >
-      <ScrollView horizontal style={styles.scrollView}>
-
-        <StatusBar barStyle='light-content' />
-
-        <Link to="/sigin" component={SignInTab} activeOpacity={0.8} />
-        <Link to="/" component={RepoTab} activeOpacity={0.8} />
-        {/* <RepoTab/>
-
-      <SignInTab/> */}
+      <ScrollView horizontal  >
+        
+          <PressSign/>
+          <PressRepo/>
+        
       </ScrollView>
     </View >
   );

@@ -2,8 +2,8 @@ import React from 'react';
 import {
   TouchableWithoutFeedback,
   View,
-  Text,
   StyleSheet,
+  Link
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     color: 'white',
     width: 100,
     height: 50,
-    fontWeight: 'bold',
+    //fontWeight: 700,
   }
 });
 
@@ -20,7 +20,8 @@ const SignInTab = () => {
   return (
     <TouchableWithoutFeedback>
       <View>
-         <Text style={styles.textStyle}>Sign In</Text> 
+        {/* <Text style={styles.textStyle}>Sign In</Text> */}
+        <Link to="/sigin">Sign In</Link>
       </View>
     </TouchableWithoutFeedback >
   );
