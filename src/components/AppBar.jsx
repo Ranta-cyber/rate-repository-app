@@ -17,7 +17,7 @@ import theme from '../theme';
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    flex: 1,
+    flex: 0,
     paddingTop: Constants.statusBarHeight,
     backgroundColor: 'black',     //'#ECF0F1',
     padding: 30,
@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'flex-start',
-    alignContent: 'flex-start'
+    alignContent: 'flex-start',
+    height: 150,
   },
 
   textStyle: {
