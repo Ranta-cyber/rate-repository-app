@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
   },
- 
+
   languageTag: {
     backgroundColor: '#0366d6',
     color: 'white',
@@ -91,7 +91,7 @@ const RepositoryItem = ({ itemData }) => (
             uri: itemData.ownerAvatarUrl,
           }}
         />
-        <View  style={styles.flexItem6}>
+        <View style={styles.flexItem6}>
           <Text > {itemData.fullName}</Text>
           <Text>  {itemData.description}</Text>
           <Text style={styles.languageTag}> {itemData.language}</Text>

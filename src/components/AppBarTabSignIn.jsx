@@ -2,9 +2,9 @@ import React from 'react';
 import {
   TouchableWithoutFeedback,
   View,
-  StyleSheet,
-  Link
+  StyleSheet
 } from 'react-native';
+import { Link } from 'react-router-native';
 
 const styles = StyleSheet.create({
   textStyle: {

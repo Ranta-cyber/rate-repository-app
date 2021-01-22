@@ -6,7 +6,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { Link } from 'react-router-native'
+import { Link } from 'react-router-native';
 import RepoTab from './AppBarTab';
 import SignInTab from './AppBarTabSignIn';
 
