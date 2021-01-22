@@ -1,29 +1,29 @@
 import React from 'react';
 import FormikTextInput from './FormikTextInput';
-import { Formik, Form, Field, useField } from 'formik';
+import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 import { StyleSheet, View, Button, Text } from 'react-native';
-import Constants from 'expo-constants';
+
 
 const styles = StyleSheet.create({
   container: {
     //flex: 1,
-      display: 'flex',
-     flexDirection: 'row',
-     backgroundColor: 'white',
-     alignItems: 'flex-start',
-     alignContent: 'space-between',
-     height: 500, 
-     width: 300,
-     flexWrap: 'wrap',
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    alignItems: 'flex-start',
+    alignContent: 'space-between',
+    height: 500,
+    width: 300,
+    flexWrap: 'wrap',
   },
 
   textStyle: {
     color: 'black',
     height: 80,
     backgroundColor: 'white',
-   borderWidth: 2,
-    borderRadius: 10, 
+    borderWidth: 2,
+    borderRadius: 10,
     flexGrow: 1,
     lineHeight: 6,
     flexDirection: 'row',
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     height: 80,
     backgroundColor: 'white',
-   borderWidth: 2,
-    borderRadius: 10, 
+    borderWidth: 2,
+    borderRadius: 10,
     flexGrow: 1,
     lineHeight: 6,
     flexDirection: 'row',
@@ -77,7 +77,7 @@ const validationSchema = yup.object().shape({
   username: yup
     .string()
     .required('Username is required'),
-  
+
   password: yup
     .mixed()
     .required('Pasword is required'),
@@ -116,15 +116,15 @@ export const MyReactNativeForm = () => {
             </View>
             <View style={errors.password ? styles.textStyleError : styles.textStyle}>
               <FormikTextInput name='password'
-                placeholder='password' 
-                secureTextEntry={true}/>
-                
-                <View>
-                  {/* <ErrorMessage errorValue={touched.password && errors.password} /> */}  
+                placeholder='password'
+                secureTextEntry={true} />
+
+              <View>
+                {/* <ErrorMessage errorValue={touched.password && errors.password} /> */}
               </View>
             </View>
-            <View  style={styles.buttonStyle}>
-              <Button  type="submit" title="Submit" />
+            <View style={styles.buttonStyle}>
+              <Button type="submit" title="Submit" />
             </View>
           </Form>
         )}
