@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 100,
     top: 20,
-    //fontWeight: 700,
+    //fontWeight: 'bold',
     lineHeight: 6,
     flexDirection: 'column',
     justifyContent: 'space-around',
@@ -100,16 +100,20 @@ const RepositoryItem = ({ itemData }) => (
 
     </View>
     <View style={styles.flexItem4}>
-      <Text>{(itemData.forksCount / 1000).toFixed(1)}k Forks</Text>
+      <Text fontWeight="bold">{(itemData.forksCount / 1000).toFixed(1)}k</Text>
+      <Text>Forks</Text>
     </View>
     <View style={styles.flexItem4}>
-      <Text>{(itemData.stargazersCount / 1000).toFixed(1)}k Stars</Text>
+      <Text fontWeight="bold">{(itemData.stargazersCount / 1000).toFixed(1)}k </Text>
+      <Text>Stars</Text>
     </View>
     <View style={styles.flexItem4}>
-      <Text color="textSecondary">{itemData.ratingAverage} Rating</Text>
+      <Text color="textSecondary" fontWeight="bold">{itemData.ratingAverage} </Text>
+      <Text>Rating</Text>
     </View>
     <View style={styles.flexItem4}>
-      <Text>{itemData.reviewCount} Reviews</Text>
+      <Text fontWeight="bold">{itemData.reviewCount} </Text>
+      <Text>Reviews</Text>
     </View>
   </View>
 );

@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 20,
     //top: 20,
-    marginTop: 50
+    marginTop: 50,
+    width: 300,
     /*  width: '90%',
      marginTop: 50 */
   },
