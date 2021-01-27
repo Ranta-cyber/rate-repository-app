@@ -1,23 +1,14 @@
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
-import RepositoryItem from './RepositoryItem';
-
+import { FlatList, StyleSheet, View } from 'react-native';
+import RepositoryItem from './../components/RepositoryItem';
+import useRepositories from './../hooks/useRepositories';
 const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
-  /* flexContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    backgroundColor: '#e1e4e8',
-  },
-  flexItemA: {
-    flexGrow: 0,
-    backgroundColor: 'white',
-  }, */
 });
 
-const repositories = [
+/* const repositories = [
   {
     id: 'jaredpalmer.formik',
     fullName: 'jaredpalmer/formik',
@@ -62,30 +53,37 @@ const repositories = [
     reviewCount: 0,
     ownerAvatarUrl: 'https://avatars3.githubusercontent.com/u/13142323?v=4',
   },
-];
+]; */
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
+  const { repositories } = useRepositories();
+  //const [repositories, setRepositories] = useState();
+
+  if (repositories)
+console.log('repositories.data:', repositories.data);
+
+  // Get the nodes from the edges array
+    const repositoryNodes = repositories
+    ? repositories.edges.map(edge => edge.node)
+    : []; 
+
   const renderItem = ({ item }) => (
     <View style={styles.flexItemA}>
       <RepositoryItem itemData={item} />
     </View>
-
   );
   return (
+    <FlatList
+      data={repositoryNodes}
 
-    //<View style={styles.flexContainer}>
+      //data={repositories}
+      ItemSeparatorComponent={ItemSeparator}
+      renderItem={renderItem}
 
-
-      <FlatList
-        data={repositories}
-        ItemSeparatorComponent={ItemSeparator}
-        renderItem={renderItem}
-      />
-
-
-    //</View>
+    // Other props
+    />
   );
 };
 
