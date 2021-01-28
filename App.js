@@ -1,12 +1,13 @@
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
 import { ApolloProvider } from '@apollo/react-hooks';
+import Constants from 'expo-constants';
 
 import Main from './src/main';
 import createApolloClient from './src/utils/apolloClient';
 
 const apolloClient = createApolloClient();
-
+console.log(Constants.manifest);
 const App = () => {
   return (
     <NativeRouter>
