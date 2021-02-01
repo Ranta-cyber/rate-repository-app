@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
   flexItem1: {
     flexGrow: 0,
     backgroundColor: 'white',
-    fontWeight: 700,
+    //fontWeight: 'bold',
     width: 300,
     height: 150,
     top: 10,
-    lineHeight: 6,
+    //lineHeight: 6,
     flexDirection: 'column',
   },
   flexItem2: {
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     height: 100,
     top: 20,
     //fontWeight: 'bold',
-    lineHeight: 6,
+    //lineHeight: 6,
     flexDirection: 'column',
     justifyContent: 'space-around',
   },
