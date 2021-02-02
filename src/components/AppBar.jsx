@@ -51,21 +51,23 @@ const styles = StyleSheet.create({
     } */
 });
 
- const PressRepo = () => {
+const PressRepo = () => {
   return (
-    <Link to="/signin" component={TouchableWithoutFeedback}>
-          <Text style={styles.textStyle}>Sign In</Text>
-          </Link>
+    <Link to="/" component={TouchableWithoutFeedback}>
+      <Text style={styles.textStyle}>Repositories</Text>
+    </Link>
+
   );
 };
 
 
 const PressSign = () => {
-  return(
-        <Link to="/" component={TouchableWithoutFeedback}>
-          <Text style={styles.textStyle}>Repositories</Text>
-        </Link>
-  );}; 
+  return (
+    <Link to="/signin" component={TouchableWithoutFeedback}>
+      <Text style={styles.textStyle}>Sign In</Text>
+    </Link>
+  );
+};
 
 
 const AppBar = () => {
@@ -73,10 +75,11 @@ const AppBar = () => {
 
     <View style={styles.container} >
       <ScrollView horizontal  >
-        
-          <PressSign/>
-          <PressRepo/>
-        
+
+        <PressRepo />
+        <PressSign />
+
+
       </ScrollView>
     </View >
   );

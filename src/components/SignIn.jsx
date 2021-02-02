@@ -4,6 +4,7 @@ import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 import { StyleSheet, View, Button, Text } from 'react-native';
 import useSignIn from './../hooks/useSignIn';
+import { useHistory } from "react-router-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -73,24 +74,10 @@ const styles = StyleSheet.create({
     } */
 });
 
-/* const SignIn = () => {
-
-  
-
-  
-
-  return (
-
-    <View style={styles.flexContainer}>
-      <MyReactNativeForm />
-    </View>
-
-  );
-}; */
-
 const SignIn = () => {
 
   const [signIn] = useSignIn();
+  let history = useHistory();
 
   const validationSchema = yup.object().shape({
     username: yup
@@ -118,10 +105,11 @@ const SignIn = () => {
     console.log('onSubmit');
     try {
       const { data } = await signIn({ username, password });
-      console.log('data:',data);
+      console.log('data:', data);
     } catch (e) {
-      console.log('error:',e);
+      console.log('error:', e);
     }
+    history.push("/");
   };
 
   return (
@@ -132,7 +120,7 @@ const SignIn = () => {
         validationSchema={validationSchema}>
         {({ handleChange,
           values,
-           handleSubmit,
+          handleSubmit,
           errors,
           isValid,
           touched,
@@ -152,7 +140,7 @@ const SignIn = () => {
                 </View>
               </View>
               <View style={styles.buttonStyle}>
-                <Button type="submit" title="Submit" onPress={handleSubmit}/>
+                <Button type="submit" title="Submit" onPress={handleSubmit} />
               </View>
             </Form>
           )}
