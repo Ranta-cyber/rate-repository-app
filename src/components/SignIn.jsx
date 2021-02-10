@@ -75,8 +75,7 @@ const styles = StyleSheet.create({
 });
 
 const SignIn = () => {
-
-  const [signIn] = useSignIn();
+  const [signIn] = useSignIn(); //get a token
   let history = useHistory();
 
   const validationSchema = yup.object().shape({
@@ -89,11 +88,11 @@ const SignIn = () => {
       .required('Pasword is required'),
   });
 
-  const ErrorMessage = ({ errorValue }) => (
+  /* const ErrorMessage = ({ errorValue }) => (
     <View style={styles.container}>
       <Text style={styles.errorText}>{errorValue}</Text>
     </View>
-  );
+  ); */
 
   const initialValues = {
     username: '',
@@ -104,12 +103,14 @@ const SignIn = () => {
     const { username, password } = values;
     console.log('onSubmit');
     try {
-      const { data } = await signIn({ username, password });
+      const data = await signIn({ username, password });
       console.log('data:', data);
+      history.push("/");
+      
     } catch (e) {
       console.log('error:', e);
     }
-    history.push("/");
+    
   };
 
   return (
@@ -118,13 +119,11 @@ const SignIn = () => {
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}>
-        {({ handleChange,
-          values,
+        {({ 
           handleSubmit,
-          errors,
-          isValid,
-          touched,
-          handleBlur }) => (
+          errors
+      
+         }) => (
             <Form>
               <View style={errors.username ? styles.textStyleError : styles.textStyle} >
                 <FormikTextInput name='username' placeholder='username'
@@ -140,7 +139,7 @@ const SignIn = () => {
                 </View>
               </View>
               <View style={styles.buttonStyle}>
-                <Button type="submit" title="Submit" onPress={handleSubmit} />
+                <Button  title="Submit" onPress={handleSubmit} />
               </View>
             </Form>
           )}

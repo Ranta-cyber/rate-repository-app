@@ -19,3 +19,11 @@ export const GET_REPOSITORIES = gql`
     }
   }
 `;
+
+export const GET_AUTHORIZEDUSER = gql`
+query{
+  authorizedUser {
+    username
+  }
+}
+`;

@@ -77,7 +77,7 @@ console.log('repositories.data:', repositories.data);
   return (
     <FlatList
       data={repositoryNodes}
-
+      keyExtractor={item => item.id}
       //data={repositories}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={renderItem}

@@ -7,12 +7,13 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { Link } from 'react-router-native';
-import RepoTab from './AppBarTab';
-import SignInTab from './AppBarTabSignIn';
+
 
 import Constants from 'expo-constants';
-import SignIn from './SignIn';
-import theme from '../theme';
+
+import { useQuery } from '@apollo/react-hooks';
+import { GET_AUTHORIZEDUSER } from '../graphql/queries';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -54,31 +55,64 @@ const styles = StyleSheet.create({
 const PressRepo = () => {
   return (
     <Link to="/" component={TouchableWithoutFeedback}>
-      <Text style={styles.textStyle}>Repositories</Text>
-    </Link>
+      <View>
+        <Text style={styles.textStyle}>Repositories</Text>
+      </View>
+    </Link >
 
   );
 };
 
 
-const PressSign = () => {
-  return (
-    <Link to="/signin" component={TouchableWithoutFeedback}>
-      <Text style={styles.textStyle}>Sign In</Text>
-    </Link>
-  );
+const PressSign = ({ userLogged }) => {
+  console.log('userlogged:', userLogged);
+  if (!userLogged) {
+    return (
+      <Link to="/signin" component={TouchableWithoutFeedback}>
+        <View>
+
+          <Text style={styles.textStyle}>Sign in</Text>
+
+        </View>
+      </Link>
+    );
+  }
+  else {
+
+    console.log(' sign out');
+   
+    return (
+      <Link to = "/signout" component = { TouchableWithoutFeedback } >
+      <View>
+        <Text style={styles.textStyle}>Sign out</Text>
+      </View>
+    </Link >
+    );
+
+  }
 };
 
 
 const AppBar = () => {
+
+  const { data, error } = useQuery(GET_AUTHORIZEDUSER, {
+    fetchPolicy: 'cache-and-network',
+  });
+
+  if (data) {
+    console.log('user authorizedUser:', data.authorizedUser);
+  }
+
+  const userLoggedIn = data && data.authorizedUser;
+  console.log('userloggedin:', userLoggedIn);
+
   return (
 
     <View style={styles.container} >
       <ScrollView horizontal  >
 
         <PressRepo />
-        <PressSign />
-
+        <PressSign userLogged={userLoggedIn} />
 
       </ScrollView>
     </View >
