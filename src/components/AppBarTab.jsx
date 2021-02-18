@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import { Link } from 'react-router-native';
 
+// koe 
+
 const styles = StyleSheet.create({
   container: {
 
