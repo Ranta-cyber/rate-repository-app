@@ -92,27 +92,27 @@ const RepositoryItem = ({ itemData }) => (
           }}
         />
         <View style={styles.flexItem6}>
-          <Text > {itemData.fullName}</Text>
-          <Text>  {itemData.description}</Text>
-          <Text style={styles.languageTag}> {itemData.language}</Text>
+          <Text testID="testFullName" > {itemData.fullName}</Text>
+          <Text testID="testDescription" >  {itemData.description}</Text>
+          <Text testID="testLanguage" style={styles.languageTag}> {itemData.language}</Text>
         </View>
       </View>
 
     </View>
     <View style={styles.flexItem4}>
-      <Text fontWeight="bold">{(itemData.forksCount / 1000).toFixed(1)}k</Text>
+      <Text testID="testForks" fontWeight="bold">{(itemData.forksCount / 1000).toFixed(1)}k</Text>
       <Text>Forks</Text>
     </View>
     <View style={styles.flexItem4}>
-      <Text fontWeight="bold">{(itemData.stargazersCount / 1000).toFixed(1)}k </Text>
+      <Text testID="testStars" fontWeight="bold">{(itemData.stargazersCount / 1000).toFixed(1)}k </Text>
       <Text>Stars</Text>
     </View>
     <View style={styles.flexItem4}>
-      <Text color="textSecondary" fontWeight="bold">{itemData.ratingAverage} </Text>
+      <Text testID="testRating" color="textSecondary" fontWeight="bold">{itemData.ratingAverage} </Text>
       <Text>Rating</Text>
     </View>
     <View style={styles.flexItem4}>
-      <Text fontWeight="bold">{itemData.reviewCount} </Text>
+      <Text testID="testReviews" fontWeight="bold">{itemData.reviewCount} </Text>
       <Text>Reviews</Text>
     </View>
   </View>

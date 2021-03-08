@@ -2,7 +2,7 @@ import React from 'react';
 //import Constants from 'expo-constants';
 import { StyleSheet, View } from 'react-native';
 import { Route, Switch, Redirect } from 'react-router-native';
-import RepositoryList from './components/RepositoryList';
+import RepositoryList from './components/Repository/RepositoryList';
 import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
 import AppBar from './components/AppBar';
