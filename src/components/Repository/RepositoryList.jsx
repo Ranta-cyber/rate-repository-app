@@ -1,7 +1,8 @@
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native';
 import RepositoryItem from '../RepositoryItem';
 import useRepositories from '../../hooks/useRepositories';
+import { useHistory } from "react-router-native";
 const styles = StyleSheet.create({
   separator: {
     height: 10,
@@ -55,23 +56,24 @@ const styles = StyleSheet.create({
   },
 ]; */
 
+
 const ItemSeparator = () => <View style={styles.separator} />;
 
-
-
 export const RepositoryListContainer = ({ repositories }) => {
-
-   if (repositories)
-console.log('repositories.data:', repositories.data); 
+  const history = useHistory();
+  if (repositories)
+    console.log('repositories.data:', repositories.data);
 
   // Get the nodes from the edges array
-    const repositoryNodes = repositories
+  const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
-    : []; 
+    : [];
 
   const renderItem = ({ item }) => (
     <View style={styles.flexItemA}>
-      <RepositoryItem itemData={item} />
+      <TouchableOpacity onPress={() => history.push(`/repository/${item.id}`)}>
+        <RepositoryItem itemData={item} showOnlyOne={false} />
+      </TouchableOpacity>
     </View>
   );
   return (
@@ -87,6 +89,7 @@ console.log('repositories.data:', repositories.data);
 };
 
 const RepositoryList = () => {
+  
   const { repositories } = useRepositories();
 
   return <RepositoryListContainer repositories={repositories} />;

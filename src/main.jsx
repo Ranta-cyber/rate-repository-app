@@ -6,6 +6,7 @@ import RepositoryList from './components/Repository/RepositoryList';
 import SignIn from './components/SignIn/SignIn';
 import SignOut from './components/SignOut';
 import AppBar from './components/AppBar';
+import Repository from './components/Repository';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,6 +27,7 @@ const Main = () => {
       <Route exact path="/" component={RepositoryList} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signout" component={SignOut} />
+        <Route path="/repository/:id" component={Repository} />
         <Redirect to="/" />
       </Switch>
     </View>
