@@ -2,11 +2,12 @@ import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import RepositoryItem from '../components/RepositoryItem';
 import useRepository from '../hooks/useRepository';
+import ReviewItem from './ReviewItem';
 import { useParams } from "react-router-native";
 
 const styles = StyleSheet.create({
   separator: {
-    height: 10,
+    height: 15,
   },
 });
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -30,13 +31,21 @@ const Repository = () => {
       <RepositoryItem itemData={item} showOnlyOne={true} />
     </View>
   );
+  const renderReview = ({ item }) => (
+    <View style={styles.flexItemA}>
+      <ReviewItem itemData={item}/>
+    </View>
+  );
+
+  
 
   return (
     <FlatList
-      data={repoNodes}
+      data={repositories.reviews.edges}
       keyExtractor={item => item.id}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={renderItem}
+      renderItem={renderReview}
+      ListHeaderComponent={() => <RepositoryItem itemData = {repositories} showOnlyOne={true}/>}
     // Other props
     />
   );
