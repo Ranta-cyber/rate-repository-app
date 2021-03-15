@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   textStyle: {
 
     color: 'white',
-    width: 100,
+    width: 150,
     height: 50,
     //fontWeight: theme.fontWeights.bold,
   },
@@ -63,6 +63,18 @@ const PressRepo = () => {
   );
 };
 
+const PressReview = ({ userLogged }) => {
+  if (!userLogged) { return null;} 
+
+  return (
+    <Link to="/reviewForm" component={TouchableWithoutFeedback}>
+      <View>
+        <Text style={styles.textStyle}>Create a review</Text>
+      </View>
+    </Link >
+
+  );
+};
 
 const PressSign = ({ userLogged }) => {
   console.log('userlogged:', userLogged);
@@ -70,9 +82,7 @@ const PressSign = ({ userLogged }) => {
     return (
       <Link to="/signin" component={TouchableWithoutFeedback}>
         <View>
-
           <Text style={styles.textStyle}>Sign in</Text>
-
         </View>
       </Link>
     );
@@ -112,6 +122,7 @@ const AppBar = () => {
       <ScrollView horizontal  >
 
         <PressRepo />
+        <PressReview userLogged={userLoggedIn} />
         <PressSign userLogged={userLoggedIn} />
 
       </ScrollView>
