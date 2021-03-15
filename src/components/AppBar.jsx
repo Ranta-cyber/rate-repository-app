@@ -76,6 +76,20 @@ const PressReview = ({ userLogged }) => {
   );
 };
 
+const PressSignUp = ({ userLogged }) => {
+  if (!userLogged) {
+    return (
+      <Link to="/signup" component={TouchableWithoutFeedback}>
+        <View>
+          <Text style={styles.textStyle}>Sign Up</Text>
+        </View>
+      </Link>
+    );
+  }
+
+  else {return null;}
+};
+
 const PressSign = ({ userLogged }) => {
   console.log('userlogged:', userLogged);
   if (!userLogged) {
@@ -124,6 +138,7 @@ const AppBar = () => {
         <PressRepo />
         <PressReview userLogged={userLoggedIn} />
         <PressSign userLogged={userLoggedIn} />
+        <PressSignUp userLogged={userLoggedIn} />
 
       </ScrollView>
     </View >
