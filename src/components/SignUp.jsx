@@ -11,13 +11,14 @@ const styles = StyleSheet.create({
   container: {
     //flex: 1,
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     backgroundColor: 'white',
     alignItems: 'flex-start',
     alignContent: 'space-between',
     height: 500,
     width: 300,
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap',
+    justifyContent: 'center',
   },
 
   textStyle: {
@@ -26,39 +27,32 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderWidth: 2,
     borderRadius: 10,
-    flexGrow: 1,
-    //lineHeight: 6,
+    flexGrow: 0,
     flexDirection: 'row',
     padding: 20,
-    //top: 20,
     marginTop: 50,
     width: 300,
-    /*  width: '90%',
-     marginTop: 50 */
   },
   textStyleError: {
     color: 'red',
-    borderColor: 'red',
     height: 80,
     backgroundColor: 'white',
     borderWidth: 2,
     borderRadius: 10,
-    flexGrow: 1,
-    //lineHeight: 6,
+    flexGrow: 0,
     flexDirection: 'row',
     padding: 20,
-    //top: 20,
-    marginTop: 50
-    /*  width: '90%',
-     marginTop: 50 */
+    marginTop: 50,
+    width: 300,
   },
   buttonStyle: {
     backgroundColor: 'blue',
     color: 'white',
-    flexGrow: 1,
+    flexGrow: 0,
     borderWidth: 2,
     borderRadius: 10,
-    marginTop: 20
+    marginTop: 20,
+    width: 300,
   },
   item: {
     flexGrow: 0,
@@ -75,21 +69,30 @@ export const SignUpContainer = ({ onSubmit, errors }) => {
         <View style={errors.username ? styles.textStyleError : styles.textStyle} >
           <FormikTextInput name='username' placeholder='username' testID='usernameSignIn' />
         </View>
+        <View >
+          {errors.username ? (
+            <div style={{ color: 'red' }} > {errors.username}</div>
+          ) : null}
+        </View>
+
         <View style={errors.password ? styles.textStyleError : styles.textStyle}>
           <FormikTextInput name='password' placeholder='password' secureTextEntry={true} testID='passwordSignUp' />
-
-          <View>
-            {/* <ErrorMessage errorValue={touched.password && errors.password} /> */}
-          </View>
+        </View>
+        <View >
+          {errors.password ? (
+            <div style={{ color: 'red' }} > {errors.password}</div>
+          ) : null}
         </View>
 
         <View style={errors.password ? styles.textStyleError : styles.textStyle}>
           <FormikTextInput name='confirm' placeholder='confirm password' secureTextEntry={true} testID='passwordConfirm' />
-
-          <View>
-            {/* <ErrorMessage errorValue={touched.password && errors.password} /> */}
-          </View>
         </View>
+        <View >
+          {errors.confirm ? (
+            <div style={{ color: 'red' }} > {errors.confirm}</div>
+          ) : null}
+        </View>
+
 
         <View style={styles.buttonStyle}>
           <Button title="Submit" onPress={onSubmit} testID='submitSignIn' />
@@ -112,8 +115,8 @@ const SignUp = () => {
 
     password: yup
       .string()
-      .min(5, {message: 'Minimun characters 5'})
-      .max(50, {message: 'Maximun characters 50'})
+      .min(5, 'Minimun characters 5')
+      .max(50, 'Maximun characters 50')
       .required('Pasword is required'),
 
     confirm: yup
@@ -133,8 +136,8 @@ const SignUp = () => {
     const { username, password } = values;
     console.log('onSubmit');
     try {
-       const data = await signUp({ username, password });
-       const data2 = await signIn({ username, password });
+      const data = await signUp({ username, password });
+      const data2 = await signIn({ username, password });
       /*console.log('data:', data);
       console.log('data2:', data2);
        */

@@ -10,13 +10,14 @@ const styles = StyleSheet.create({
   container: {
     //flex: 1,
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     backgroundColor: 'white',
     alignItems: 'flex-start',
     alignContent: 'space-between',
     height: 500,
     width: 300,
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap',
+    justifyContent: 'center',
   },
 
   textStyle: {
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderWidth: 2,
     borderRadius: 10,
-    flexGrow: 1,
+    flexGrow: 0,
     //lineHeight: 6,
     flexDirection: 'row',
     padding: 20,
@@ -37,27 +38,24 @@ const styles = StyleSheet.create({
   },
   textStyleError: {
     color: 'red',
-    borderColor: 'red',
     height: 80,
     backgroundColor: 'white',
     borderWidth: 2,
     borderRadius: 10,
-    flexGrow: 1,
-    //lineHeight: 6,
+    flexGrow: 0,
     flexDirection: 'row',
     padding: 20,
-    //top: 20,
-    marginTop: 50
-    /*  width: '90%',
-     marginTop: 50 */
+    marginTop: 50,
+    width: 300,
   },
   buttonStyle: {
     backgroundColor: 'blue',
     color: 'white',
-    flexGrow: 1,
+    flexGrow: 0,
     borderWidth: 2,
     borderRadius: 10,
-    marginTop: 20
+    marginTop: 20,
+    width: 300,
   },
   item: {
     flexGrow: 0,
@@ -72,17 +70,25 @@ export const SignInContainer = ({ onSubmit, errors }) => {
     <Form>
       <View style={styles.container}>
         <View style={errors.username ? styles.textStyleError : styles.textStyle} >
-          <FormikTextInput name='username' placeholder='username' testID='usernameSignIn'/>
+          <FormikTextInput name='username' placeholder='username' testID='usernameSignIn' />
         </View>
-        <View style={errors.password ? styles.textStyleError : styles.textStyle}>
-          <FormikTextInput name='password' placeholder='password' secureTextEntry={true} testID='passwordSignIn'/>
+        <View >
+          {errors.username ? (
+            <div style={{ color: 'red' }} > {errors.username}</div>
+          ) : null}
+        </View>
 
-          <View>
-            {/* <ErrorMessage errorValue={touched.password && errors.password} /> */}
-          </View>
+        <View style={errors.password ? styles.textStyleError : styles.textStyle}>
+          <FormikTextInput name='password' placeholder='password' secureTextEntry={true} testID='passwordSignIn' />
         </View>
+        <View >
+          {errors.password ? (
+            <div style={{ color: 'red' }} > {errors.password}</div>
+          ) : null}
+        </View>
+
         <View style={styles.buttonStyle}>
-          <Button title="Submit" onPress={onSubmit} testID='submitSignIn'/>
+          <Button title="Submit" onPress={onSubmit} testID='submitSignIn' />
         </View>
       </View>
     </Form>

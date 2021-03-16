@@ -8,7 +8,8 @@ import Text from './Text';
 const styles = StyleSheet.create({
   errorText: {
     marginTop: 5,
-    color: '#d73a4a',
+    // color: '#d73a4a',
+    color: 'red',
   },
 });
 
@@ -22,10 +23,10 @@ const FormikTextInput = ({ name, ...props }) => {
         onChangeText={value => helpers.setValue(value)}
         onBlur={() => helpers.setTouched(true)}
         value={field.value}
-        error={showError}
+        // error={showError}
         {...props}
       />
-      {showError && <Text style={styles.errorText}>{meta.error}</Text>}
+      {/* {showError && <Text style={styles.errorText}>{meta.error}</Text>} */}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Button } from 'react-native-elements';
 
 const InputButton = ({ title, buttonType, buttonColor, ...rest }) => (
@@ -6,7 +6,7 @@ const InputButton = ({ title, buttonType, buttonColor, ...rest }) => (
         {...rest}
         type={buttonType}
         title={title}
-        buttonStyle={{ borderColor: buttonColor, borderRadius: 3 }}
+        buttonStyle={{ borderColor: buttonColor, borderRadius: 10 }}
         titleStyle={{ color: '#ffffff' }}
     />
 )
