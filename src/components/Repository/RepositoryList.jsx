@@ -1,4 +1,4 @@
-import React from 'react';
+import  React, {useState}  from 'react';
 import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native';
 import RepositoryItem from '../RepositoryItem';
 import useRepositories from '../../hooks/useRepositories';
@@ -89,8 +89,11 @@ export const RepositoryListContainer = ({ repositories }) => {
 };
 
 const RepositoryList = () => {
+
+  const [ord, setOrd] = useState('CREATED_AT');
+  const [dir, setDir] = useState('ASC');
   
-  const { repositories } = useRepositories();
+  const { repositories } = useRepositories(ord, dir);
 
   return <RepositoryListContainer repositories={repositories} />;
 };
