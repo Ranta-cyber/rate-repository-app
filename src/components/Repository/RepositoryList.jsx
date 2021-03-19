@@ -1,8 +1,10 @@
-import  React, {useState}  from 'react';
+import React, { useState } from 'react';
 import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native';
 import RepositoryItem from '../RepositoryItem';
+import OrderRepositories from './../OrderRepositories';
 import useRepositories from '../../hooks/useRepositories';
 import { useHistory } from "react-router-native";
+
 const styles = StyleSheet.create({
   separator: {
     height: 10,
@@ -56,11 +58,11 @@ const styles = StyleSheet.create({
   },
 ]; */
 
-
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, sort, setSort }) => {
   const history = useHistory();
+
   if (repositories)
     console.log('repositories.data:', repositories.data);
 
@@ -76,26 +78,44 @@ export const RepositoryListContainer = ({ repositories }) => {
       </TouchableOpacity>
     </View>
   );
+
   return (
     <FlatList
       data={repositoryNodes}
       keyExtractor={item => item.id}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={renderItem}
+      ListHeaderComponent={OrderRepositories(sort, setSort)}
 
     // Other props
     />
   );
 };
 
+
+
 const RepositoryList = () => {
 
-  const [ord, setOrd] = useState('CREATED_AT');
-  const [dir, setDir] = useState('ASC');
+  const [sort, setSort] = useState('');
+
+  let ord='CREATED_AT', dir='ASC';
   
+  //console.log('sort:',sort);
+
+   switch (sort) {
+    case 'highest':
+      ord = 'RATING_AVERAGE', dir = 'DESC'; break;
+    case 'lowest':
+      ord = 'RATING_AVERAGE', dir = 'ASC'; break;
+    case 'last':
+      ord = 'CREATED_AT', dir = 'ASC'; break;
+    default:
+      ord = 'CREATED_AT', dir = 'ASC';
+  } 
+
   const { repositories } = useRepositories(ord, dir);
 
-  return <RepositoryListContainer repositories={repositories} />;
+  return <RepositoryListContainer repositories={repositories} sort={sort} setSort={setSort}/>;
 };
 
 export default RepositoryList;

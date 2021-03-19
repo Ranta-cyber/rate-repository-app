@@ -6,6 +6,8 @@ const useRepositories = (ord, dir) => {
   const [loading, setLoading] = useState(false);
 
   let variables = {order:ord  , direction:dir};
+  //variables.order = 'CREATED_AT';
+  //variables.direction = 'ASC';
 
   const { data, error }  = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network', variables
