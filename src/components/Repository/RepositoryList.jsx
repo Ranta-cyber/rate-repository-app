@@ -3,7 +3,9 @@ import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native';
 import RepositoryItem from '../RepositoryItem';
 import OrderRepositories from './../OrderRepositories';
 import useRepositories from '../../hooks/useRepositories';
+import MySearchBar from '../MySearchBar';
 import { useHistory } from "react-router-native";
+import { useDebounce } from 'use-debounce';
 
 const styles = StyleSheet.create({
   separator: {
@@ -60,49 +62,66 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories, sort, setSort }) => {
-  const history = useHistory();
+export class RepositoryListContainer extends React.Component {
+  renderHeader = () => {
+    // this.props contains the component's props
+    const props = this.props;
+    //console.log('props:', props);
 
-  if (repositories)
-    console.log('repositories.data:', repositories.data);
+    return (
+      <>
+        <OrderRepositories sort={props.sort} setSort={props.setSort} />
+        <MySearchBar setSearch={props.setSearch} search={props.search}
+        />
+      </>
+    );
+  };
+  render() {
+    const props = this.props;
 
-  // Get the nodes from the edges array
-  const repositoryNodes = repositories
-    ? repositories.edges.map(edge => edge.node)
-    : [];
+    if (props.repositories)
+      console.log('repositories.data:', props.repositories.data);
 
-  const renderItem = ({ item }) => (
-    <View style={styles.flexItemA}>
-      <TouchableOpacity onPress={() => history.push(`/repository/${item.id}`)}>
-        <RepositoryItem itemData={item} showOnlyOne={false} />
-      </TouchableOpacity>
-    </View>
-  );
+    // Get the nodes from the edges array
+    const repositoryNodes = props.repositories
+      ? props.repositories.edges.map(edge => edge.node)
+      : [];
 
-  return (
-    <FlatList
-      data={repositoryNodes}
-      keyExtractor={item => item.id}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={renderItem}
-      ListHeaderComponent={OrderRepositories(sort, setSort)}
+    const renderItem = ({ item }) => (
+      <View style={styles.flexItemA}>
+        <TouchableOpacity onPress={() => props.history.push(`/repository/${item.id}`)}>
+          <RepositoryItem itemData={item} showOnlyOne={false} />
+        </TouchableOpacity>
+      </View>
+    );
 
-    // Other props
-    />
-  );
-};
+    return (
+      <FlatList
+        data={repositoryNodes}
+        keyExtractor={item => item.id}
+        ItemSeparatorComponent={ItemSeparator}
+        renderItem={renderItem}
+        ListHeaderComponent={this.renderHeader(props.sort, props.setSort)}
 
-
+      // Other props
+      />
+    );
+  }
+}
 
 const RepositoryList = () => {
 
   const [sort, setSort] = useState('');
+  const [search, setSearch] = useState('');
+  const [searchQueryDebounced] = useDebounce(search, 500);
+  const history = useHistory();
 
-  let ord='CREATED_AT', dir='ASC';
-  
-  //console.log('sort:',sort);
+  let ord = 'CREATED_AT', dir = 'ASC';
 
-   switch (sort) {
+  console.log('sort:', sort);
+  console.log('search:', search);
+
+  switch (sort) {
     case 'highest':
       ord = 'RATING_AVERAGE', dir = 'DESC'; break;
     case 'lowest':
@@ -111,11 +130,17 @@ const RepositoryList = () => {
       ord = 'CREATED_AT', dir = 'ASC'; break;
     default:
       ord = 'CREATED_AT', dir = 'ASC';
-  } 
+  }
 
-  const { repositories } = useRepositories(ord, dir);
+  const { repositories } = useRepositories(ord, dir, searchQueryDebounced);
 
-  return <RepositoryListContainer repositories={repositories} sort={sort} setSort={setSort}/>;
+  return <RepositoryListContainer
+    repositories={repositories}
+    sort={sort}
+    setSort={setSort}
+    history={history}
+    search={searchQueryDebounced}
+    setSearch={setSearch} />;
 };
 
 export default RepositoryList;

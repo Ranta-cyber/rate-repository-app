@@ -38,6 +38,7 @@
     "react-native-web": "~0.11.7",
     "react-router-native": "^5.2.0",
     "react-spring": "^8.0.27",
+    "use-debounce": "^6.0.0",
     "yup": "^0.32.8"
   },
   "devDependencies": {

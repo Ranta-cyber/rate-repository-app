@@ -3,12 +3,14 @@ import { View } from 'react-native';
 import { Button, Menu, Divider } from 'react-native-paper';
 
 
-const OrderRepositories = (sort, setSort) => {
+const OrderRepositories = (sort) => {
   const [visible, setVisible] = React.useState(false);
 
   const openMenu = () => setVisible(true);
 
   const closeMenu = () => setVisible(false);
+
+  console.log('sort:', sort);
 
   return (
 
@@ -18,16 +20,17 @@ const OrderRepositories = (sort, setSort) => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
+        width: '55%'
       }}>
       <Menu
         visible={visible}
         onDismiss={closeMenu}
         anchor={<Button onPress={openMenu}>Select an option..</Button>}>
-        <Menu.Item onPress={() => {setSort('last'); }} title="Latest repositories" />
+        <Menu.Item onPress={() => { sort.setSort('last'); }} title="Latest repositories" />
         <Divider />
-        <Menu.Item onPress={() => { setSort('highest'); }} title="Highest rated repositories" />
+        <Menu.Item onPress={() => { sort.setSort('highest'); }} title="Highest rated repositories" />
         <Divider />
-        <Menu.Item onPress={() => { setSort('lowest'); }} title="Lowest rated repositories" />
+        <Menu.Item onPress={() => { sort.setSort('lowest'); }} title="Lowest rated repositories" />
       </Menu>
     </View>
 

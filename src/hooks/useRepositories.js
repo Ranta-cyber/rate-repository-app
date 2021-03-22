@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_REPOSITORIES } from './../../src/graphql/queries';
-const useRepositories = (ord, dir) => {
+const useRepositories = (ord, dir, search) => {
   const [repositories, setRepositories] = useState();
   const [loading, setLoading] = useState(false);
 
-  let variables = {order:ord  , direction:dir};
+  let variables = {order:ord  , direction:dir, search:search};
   //variables.order = 'CREATED_AT';
   //variables.direction = 'ASC';
 
