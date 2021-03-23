@@ -1,13 +1,13 @@
 import { gql } from 'apollo-boost';
 //repositories(orderBy:$order, orderDirection:$direction) {
- export const GET_REPOSITORIES = gql`
-  query($order: AllRepositoriesOrderBy, $direction: OrderDirection, $search: String) {
-    repositories(orderBy:$order, orderDirection:$direction, searchKeyword: $search) {
+export const GET_REPOSITORIES = gql`
+  query($order: AllRepositoriesOrderBy, $direction: OrderDirection, $search: String, $first: Int, $after: String) {
+    repositories(orderBy:$order, orderDirection:$direction, searchKeyword: $search, first: $first, after: $after) {
       edges{
         node {
           id,
           fullName,
-         description,
+          description,
           ownerName,
           ownerAvatarUrl,
           reviewCount,
@@ -17,13 +17,21 @@ import { gql } from 'apollo-boost';
           language,
           url
         }
+        cursor
       }
+      pageInfo {
+        endCursor
+        startCursor
+        totalCount
+        hasNextPage
+      }
+      
     }
   }
-`; 
+`;
 
 export const GET_REPOSITORY = gql`
-  query get_repository($id: ID!){
+  query get_repository($id: ID!, $first: Int, $after: String){
     repository(id: $id){
       id,
       fullName,
@@ -36,7 +44,7 @@ export const GET_REPOSITORY = gql`
       stargazersCount,
       language,
       url,
-      reviews {
+      reviews (first: $first, after: $after) {
         edges {
           node {
             id
@@ -48,7 +56,15 @@ export const GET_REPOSITORY = gql`
               username
             }
           }
+          cursor
         }
+        pageInfo {
+          endCursor
+          startCursor
+          totalCount
+          hasNextPage
+        }
+        
       }
     }
   }

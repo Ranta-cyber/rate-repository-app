@@ -13,7 +13,7 @@ const MySearchBar = (search) => {
       <Searchbar style={{ maxHeight: 50, width: '55%' }}
         placeholder="Search with name or owner"
          onChangeText={ (query) => search.setSearch(query)}
-        //value={query}
+        //value={search.search}
       />
     </View>
   );

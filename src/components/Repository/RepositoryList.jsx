@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
 const ItemSeparator = () => <View style={styles.separator} />;
 
 export class RepositoryListContainer extends React.Component {
+  
   renderHeader = () => {
     // this.props contains the component's props
     const props = this.props;
@@ -95,6 +96,8 @@ export class RepositoryListContainer extends React.Component {
       </View>
     );
 
+   
+
     return (
       <FlatList
         data={repositoryNodes}
@@ -102,7 +105,8 @@ export class RepositoryListContainer extends React.Component {
         ItemSeparatorComponent={ItemSeparator}
         renderItem={renderItem}
         ListHeaderComponent={this.renderHeader(props.sort, props.setSort)}
-
+        onEndReached={props.onEndReach}
+        onEndReachedThreshold={0.5}
       // Other props
       />
     );
@@ -132,7 +136,12 @@ const RepositoryList = () => {
       ord = 'CREATED_AT', dir = 'ASC';
   }
 
-  const { repositories } = useRepositories(ord, dir, searchQueryDebounced);
+  const { repositories, fetchMore } = useRepositories(ord, dir, searchQueryDebounced);
+
+  const onEndReach = () => {
+    console.log('You have reached the end of the list');
+    fetchMore();
+  };
 
   return <RepositoryListContainer
     repositories={repositories}
@@ -140,7 +149,9 @@ const RepositoryList = () => {
     setSort={setSort}
     history={history}
     search={searchQueryDebounced}
-    setSearch={setSearch} />;
+    setSearch={setSearch}
+    onEndReach={onEndReach}
+    onEndReachedThreshold={0.5} />;
 };
 
 export default RepositoryList;

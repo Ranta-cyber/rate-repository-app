@@ -14,7 +14,7 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const Repository = () => {
   const { id } = useParams();
-  const { repositories } = useRepository(id);
+  const { repositories, fetchMore } = useRepository(id);
 
   console.log('repo id', id);
   console.log('repositories', repositories);
@@ -37,7 +37,10 @@ const Repository = () => {
     </View>
   );
 
-  
+  const onEndReach = () => {
+    fetchMore();
+    console.log('You have reached the end of the list');
+  };
 
   return (
     <FlatList
@@ -45,6 +48,8 @@ const Repository = () => {
       keyExtractor={item => item.id}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={renderReview}
+      onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
       ListHeaderComponent={() => <RepositoryItem itemData = {repositories} showOnlyOne={true}/>}
     // Other props
     />
