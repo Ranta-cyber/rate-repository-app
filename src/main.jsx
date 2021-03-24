@@ -9,6 +9,7 @@ import SignUp from './components/SignUp';
 import AppBar from './components/AppBar';
 import Repository from './components/Repository';
 import ReviewForm from './components/ReviewForm';
+import ReviewList from './components/ReviewList';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,6 +33,7 @@ const Main = () => {
         <Route path="/signout" component={SignOut} />
         <Route path="/repository/:id" component={Repository} />
         <Route path="/reviewForm" component={ReviewForm} />
+        <Route path="/reviewlist" component={ReviewList} />
         <Redirect to="/" />
       </Switch>
     </View>

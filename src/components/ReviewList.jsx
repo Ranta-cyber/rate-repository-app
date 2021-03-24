@@ -1,9 +1,9 @@
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import RepositoryItem from '../components/RepositoryItem';
-import useRepository from '../hooks/useRepository';
 import ReviewItem from './ReviewItem';
 import { useParams } from "react-router-native";
+import useAuthorizedUser from '../hooks/useAuthorizedUser';
+import useRepositories from '../hooks/useRepositories';
 
 const styles = StyleSheet.create({
   separator: {
@@ -12,17 +12,17 @@ const styles = StyleSheet.create({
 });
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const Repository = () => {
+const ReviewList = () => {
   const { id } = useParams();
-  const { repositories, fetchMore } = useRepository(id);
+  const { authorizedUser } = useAuthorizedUser(true);
 
-  console.log('repo id', id);
-  console.log('repositories', repositories);
+  console.log('review id', id);
+  console.log('authorizedUser', authorizedUser);
 
-  if (!repositories) { return (<></>); }
+  if (!authorizedUser) { return (<></>); }
 
   let repoNodes = [];
-  repoNodes[0] = repositories;
+  repoNodes[0] = authorizedUser;
 
   console.log('repoNodes', repoNodes);
 
@@ -32,23 +32,23 @@ const Repository = () => {
     </View>
   );
 
-  const onEndReach = () => {
+  /* const onEndReach = () => {
     fetchMore();
     console.log('You have reached the end of the list');
-  };
+  }; */
 
   return (
     <FlatList
-      data={repositories.reviews.edges}
+      data={authorizedUser.reviews.edges}
       keyExtractor={item => item.id}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={renderReview}
-      onEndReached={onEndReach}
+      /* onEndReached={onEndReach}
         onEndReachedThreshold={0.5}
       ListHeaderComponent={() => <RepositoryItem itemData = {repositories} showOnlyOne={true}/>}
-    // Other props
+    // Other props */
     />
   );
 };
 
-export default Repository;
+export default ReviewList;

@@ -7,13 +7,11 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { Link } from 'react-router-native';
-
-
 import Constants from 'expo-constants';
+import useAuthorizedUser from '../hooks/useAuthorizedUser';
 
-import { useQuery } from '@apollo/react-hooks';
-import { GET_AUTHORIZEDUSER } from '../graphql/queries';
-
+/* import { useQuery } from '@apollo/react-hooks';
+import { GET_AUTHORIZEDUSER } from '../graphql/queries'; */
 
 const styles = StyleSheet.create({
   container: {
@@ -63,8 +61,21 @@ const PressRepo = () => {
   );
 };
 
+const PressMyReview = ({ userLogged }) => {
+  if (!userLogged) { return null; }
+
+  return (
+    <Link to="/reviewlist" component={TouchableWithoutFeedback}>
+      <View>
+        <Text style={styles.textStyle}>My reviews</Text>
+      </View>
+    </Link >
+
+  );
+};
+
 const PressReview = ({ userLogged }) => {
-  if (!userLogged) { return null;} 
+  if (!userLogged) { return null; }
 
   return (
     <Link to="/reviewForm" component={TouchableWithoutFeedback}>
@@ -87,7 +98,7 @@ const PressSignUp = ({ userLogged }) => {
     );
   }
 
-  else {return null;}
+  else { return null; }
 };
 
 const PressSign = ({ userLogged }) => {
@@ -104,13 +115,13 @@ const PressSign = ({ userLogged }) => {
   else {
 
     console.log(' sign out');
-   
+
     return (
-      <Link to = "/signout" component = { TouchableWithoutFeedback } >
-      <View>
-        <Text style={styles.textStyle}>Sign out</Text>
-      </View>
-    </Link >
+      <Link to="/signout" component={TouchableWithoutFeedback} >
+        <View>
+          <Text style={styles.textStyle}>Sign out</Text>
+        </View>
+      </Link >
     );
 
   }
@@ -119,15 +130,20 @@ const PressSign = ({ userLogged }) => {
 
 const AppBar = () => {
 
-  const { data, error } = useQuery(GET_AUTHORIZEDUSER, {
+  /* const { data, error } = useQuery(GET_AUTHORIZEDUSER, {
     fetchPolicy: 'cache-and-network',
   });
 
   if (data) {
     console.log('user authorizedUser:', data.authorizedUser);
   }
+  const userLoggedIn = data && data.authorizedUser; */
 
-  const userLoggedIn = data && data.authorizedUser;
+  const userData = useAuthorizedUser(false);
+  
+  const userLoggedIn = userData && userData.authorizedUser;
+
+  console.log('userData:', userData);
   console.log('userloggedin:', userLoggedIn);
 
   return (
@@ -137,6 +153,7 @@ const AppBar = () => {
 
         <PressRepo />
         <PressReview userLogged={userLoggedIn} />
+        <PressMyReview userLogged={userLoggedIn} />
         <PressSign userLogged={userLoggedIn} />
         <PressSignUp userLogged={userLoggedIn} />
 
