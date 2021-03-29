@@ -96,8 +96,6 @@ export class RepositoryListContainer extends React.Component {
       </View>
     );
 
-   
-
     return (
       <FlatList
         data={repositoryNodes}

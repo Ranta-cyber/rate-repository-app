@@ -20,7 +20,6 @@ const OrderRepositories = (sort) => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        width: '55%'
       }}>
       <Menu
         visible={visible}

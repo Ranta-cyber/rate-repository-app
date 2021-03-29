@@ -7,13 +7,12 @@ import * as Linking from 'expo-linking';
 const styles = StyleSheet.create({
   flexContainer: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     backgroundColor: 'white',
     flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: 300,
-    height: 300
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    height: 250
   },
   avatar: {
     width: 40,
@@ -27,11 +26,23 @@ const styles = StyleSheet.create({
     flexGrow: 0,
     backgroundColor: 'white',
     //fontWeight: 'bold',
-    width: 300,
+    //width: 300,
     height: 150,
     top: 10,
     //lineHeight: 6,
     flexDirection: 'column',
+  },
+  flexItem12: {
+    flexGrow: 0,
+    backgroundColor: 'white',
+    //fontWeight: 'bold',
+    //width: 300,
+    //height: 60,
+    //lineHeight: 6,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignContent: 'space-around',
+    
   },
   flexItem2: {
     flexGrow: 0,
@@ -42,10 +53,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   flexItem4: {
-    flexGrow: 0,
+    flexGrow: 1,
     backgroundColor: 'white',
     flexDirection: 'column',
-    width: 40,
+    //width: 40,
     height: 60,
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -54,7 +65,7 @@ const styles = StyleSheet.create({
     flexGrow: 0,
     backgroundColor: 'white',
     flexDirection: 'column',
-    width: 200,
+    //width: 200,
     height: 60,
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -63,7 +74,7 @@ const styles = StyleSheet.create({
   flexItem6: {
     flexGrow: 0,
     backgroundColor: 'white',
-    width: 250,
+    // width: 250,
     height: 100,
     top: 20,
     //fontWeight: 'bold',
@@ -75,7 +86,7 @@ const styles = StyleSheet.create({
   languageTag: {
     backgroundColor: '#0366d6',
     color: 'white',
-    width: 115,
+    //width: 115,
     height: 40,
     padding: 8,
     borderRadius: 10,
@@ -118,21 +129,23 @@ const RepositoryItem = ({ itemData, showOnlyOne }) => {
         </View>
 
       </View>
-      <View style={styles.flexItem4}>
-        <Text testID="testForks" fontWeight="bold">{(itemData.forksCount / 1000).toFixed(1)}k</Text>
-        <Text>Forks</Text>
-      </View>
-      <View style={styles.flexItem4}>
-        <Text testID="testStars" fontWeight="bold">{(itemData.stargazersCount / 1000).toFixed(1)}k </Text>
-        <Text>Stars</Text>
-      </View>
-      <View style={styles.flexItem4}>
-        <Text testID="testRating" color="textSecondary" fontWeight="bold">{itemData.ratingAverage} </Text>
-        <Text>Rating</Text>
-      </View>
-      <View style={styles.flexItem4}>
-        <Text testID="testReviews" fontWeight="bold">{itemData.reviewCount} </Text>
-        <Text>Reviews</Text>
+      <View>
+        <View style={styles.flexItem4}>
+          <Text testID="testForks" fontWeight="bold">{(itemData.forksCount / 1000).toFixed(1)}k</Text>
+          <Text>Forks</Text>
+        </View>
+        <View style={styles.flexItem4}>
+          <Text testID="testStars" fontWeight="bold">{(itemData.stargazersCount / 1000).toFixed(1)}k </Text>
+          <Text>Stars</Text>
+        </View>
+        <View style={styles.flexItem4}>
+          <Text testID="testRating" color="textSecondary" fontWeight="bold">{itemData.ratingAverage} </Text>
+          <Text>Rating</Text>
+        </View>
+        <View style={styles.flexItem4}>
+          <Text testID="testReviews" fontWeight="bold">{itemData.reviewCount} </Text>
+          <Text>Reviews</Text>
+        </View>
       </View>
 
       <GoGitButton />

@@ -19,13 +19,13 @@ const styles = StyleSheet.create({
     flex: 0,
     paddingTop: Constants.statusBarHeight,
     backgroundColor: 'black',     //'#ECF0F1',
-    padding: 30,
+    padding: 15,
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'flex-start',
     alignContent: 'flex-start',
-    height: 150,
+    height: 80,
   },
 
   textStyle: {

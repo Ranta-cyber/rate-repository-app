@@ -10,7 +10,7 @@ const MySearchBar = (search) => {
         flexDirection: 'column',
       justifyContent: 'flex-start'
       }}>
-      <Searchbar style={{ maxHeight: 50, width: '55%' }}
+      <Searchbar style={{ maxHeight: 50}}
         placeholder="Search with name or owner"
          onChangeText={ (query) => search.setSearch(query)}
         //value={search.search}

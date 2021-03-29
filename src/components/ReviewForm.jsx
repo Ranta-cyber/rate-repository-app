@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     backgroundColor: 'white',
     alignItems: 'flex-start',
     alignContent: 'space-between',
-    height: 550,
-    width: 300,
-    flexWrap: 'wrap',
+    height: 200,
+    //width: 300,
+    flexWrap: 'nowrap',
   },
 
   textStyle: {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     padding: 20,
     //top: 20,
     marginTop: 50,
-    width: 300,
+    //width: 300,
     justifyContent: 'flex-start',
     /*  width: '90%',
      marginTop: 50 */
@@ -57,10 +57,11 @@ const styles = StyleSheet.create({
   buttonStyle: {
     backgroundColor: 'blue',
     color: 'white',
-    flexGrow: 1,
+    flexGrow: 0,
     borderWidth: 2,
     borderRadius: 10,
-    marginTop: 20
+    marginTop: 20,
+    width: 150,
   },
   item: {
     flexGrow: 0,
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
 const ReviewFormContainer = ({ onSubmit, errors }) => {
 
   return (
-    <Form>
+    
       <View style={styles.container}>
         <View style={errors.username ? styles.textStyleError : styles.textStyle} > 
           <FormikTextInput name='username' placeholder='Repository owner name' testID='usernameReviewForm' />
@@ -85,13 +86,14 @@ const ReviewFormContainer = ({ onSubmit, errors }) => {
           <FormikTextInput name='rating' placeholder='Rating between 0 and 100' testID='ratingReviewForm' />
         </View>
         <View style={errors.reviewText ? styles.textStyleError : styles.textStyle}>
-          <FormikTextInput multiline='true' name='reviewText' placeholder='Review' testID='reviewTextReviewForm' />
+          <FormikTextInput  name='reviewText' placeholder='Review' testID='reviewTextReviewForm' />
         </View>
+        {/* multiline='true' ei toimi emulaattorissa */}
         <View style={styles.buttonStyle}>
           <Button title="Create a review" onPress={onSubmit} testID='submitReviewForm' />
         </View>
       </View>
-    </Form>
+    
   );
 
 };
@@ -146,9 +148,8 @@ const ReviewForm = () => {
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}>
-      {({ handleSubmit, errors
-      }) => (<ReviewFormContainer onSubmit={handleSubmit} errors={errors} />
-      )}
+      {({ handleSubmit, errors }) => <ReviewFormContainer onSubmit={handleSubmit} errors={errors} />
+      }
     </Formik>
   );
 };

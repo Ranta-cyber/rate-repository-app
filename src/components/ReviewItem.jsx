@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'space-around',
-    width: 300,
+    //width: 300,
     height: 200
     
   },
@@ -102,9 +102,9 @@ const ReviewItem = ({ itemData }) => {
           <Text style={styles.ratingTag} testID="testRating" > {itemData.node.rating}</Text>
 
           <View style={styles.flexItem6}>
-            <animated.div style={opacityStyle} >
+            {/* <animated.div style={opacityStyle} > */}
               <Text fontWeight="bold" testID="testName" > {itemData.node.user.username}</Text>
-            </animated.div >
+            {/* </animated.div > */}
             
             <Text fontWeight="bold" testID="testDate" > {format(new Date(itemData.node.createdAt),'dd.MM.yyyy')}</Text>
             <Text testID="testText" > {itemData.node.text}</Text>
